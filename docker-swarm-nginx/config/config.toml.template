@@ -1,0 +1,8 @@
+ListenAddr = ":8080" 
+DockerURL = "tcp://ipaddress:2375" 
+[[Extensions]] 
+	Name = "nginx" 
+	ConfigPath = "/etc/conf/nginx.conf" 
+	PidPath = "/etc/conf/nginx.pid" 
+	MaxConn = 1024 
+	Port = 80 

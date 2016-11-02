@@ -1,0 +1,5 @@
+groupadd docker
+usermod -aG docker putty
+usermod -aG docker harinkj
+service docker start;
+docker run -d -p 2375:2375 swarm manage -H :2375 --replication --advertise `hostname -i`:2375 consul://$consul_ip:8500

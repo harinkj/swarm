@@ -1,0 +1,41 @@
+{
+  "builders": [
+		{
+		  "type": "googlecompute",
+		  "account_file": "Harin's First Project-335635df82f2.json",
+		  "project_id": "quick-replica-95101",
+		  "source_image": "ubuntu-1404-trusty-v20160919",
+		  "zone": "us-east1-b",
+		  "image_name":"a-ubuntu-trusty-docker",
+		  "network":"main-network",
+		  "subnetwork":"default-us-east1",
+		  "tags":["docker","docker-machine"]
+		},
+		{
+		  "type": "amazon-ebs",
+		  "access_key": "AKIAJPT6SNAISIUILAYQ",
+		  "secret_key": "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",
+		  "region": "us-east-1",
+		  "source_ami": "ami-fce3c696",
+		  "instance_type": "t2.micro",
+		  "ssh_username": "ubuntu",
+		  "ami_name": "a-ubuntu-docker"
+		}
+	],
+   "provisioners": [
+	{
+		"type": "shell",
+		"inline": [
+		  "sleep 30",
+		  "sudo apt-get update; sudo apt-get install apt-transport-https ca-certificates",
+		  "sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D",
+		  "sudo echo \"deb https://apt.dockerproject.org/repo ubuntu-trusty main\" > /etc/apt/sources.list.d/docker.list ; sudo apt-get update; sudo apt-get purge lxc-docker",
+		  "sudo apt-cache policy docker-engine; sudo apt-get update ",
+		  "sudo apt-get install -y linux-image-extra-$(uname -r) linux-image-extra-virtual",
+		  "sudo apt-get install -y curl docker-engine ",
+		  "sudo curl -L https://github.com/docker/machine/releases/download/v0.7.0/docker-machine-`uname -s`-`uname -m` > /usr/local/bin/docker-machine",
+		  "sudo chmod +x /usr/local/bin/docker-machine "
+		]
+	}
+  ]
+}

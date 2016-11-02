@@ -1,0 +1,8 @@
+groupadd docker
+usermod -aG docker putty
+usermod -aG docker harinkj
+service docker stop;
+rm -f /etc/docker/key.json
+nohup docker daemon -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock &
+sleep 30
+docker run -d swarm join --advertise=`hostname -i`:2375 consul://$consul_ip:8500

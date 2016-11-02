@@ -1,0 +1,1 @@
+export swarmmgr_ip=104.196.143.77; 
